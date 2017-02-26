@@ -1,0 +1,32 @@
+{
+  "name": "tmsf-spider",
+  "version": "0.0.1",
+  "description": "tmsf spider",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"no test\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorisildur/tmsf-spider.git"
+  },
+  "keywords": [
+    "spider"
+  ],
+  "author": "victorisildur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorisildur/tmsf-spider/issues"
+  },
+  "homepage": "https://github.com/victorisildur/tmsf-spider#readme",
+  "dependencies": {
+    "@types/es6-promise": "0.0.32",
+    "cheerio": "^0.22.0",
+    "moment": "^2.17.1",
+    "typescript": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.5",
+    "ts-node": "^2.1.0"
+  }
+}
