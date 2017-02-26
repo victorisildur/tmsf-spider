@@ -1,11 +1,11 @@
-import { getDayDetail } from '../module/newHouse';
+import { getDayDetail } from '../module/oldHouse';
 import * as moment from 'moment';
-import { writeDeal } from '../storage/deal';
+import { writeSecondDeal } from '../storage/deal';
 
 export default (date: moment.Moment) => {
     getDayDetail(date.format('YYYYMMDD')).then(detail => {
         console.dir(detail);
-        writeDeal({
+        writeSecondDeal({
             date: date.format('YYYY-MM-DD'),
             houseCnt: detail.houseCnt,
             allDealCnt: detail.allDealCnt

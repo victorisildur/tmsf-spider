@@ -4,7 +4,7 @@ import { request, stringToNum } from '../util';
 import { DayDeal } from '../model';
 
 const getDayPagePath = (date: string) => {
-    return `${dailyPath}/${date}/xf.html`;
+    return `${dailyPath}/${date}/esf.html`;
 }
 
 export const getDayDetail = (date: string) => {
@@ -14,14 +14,16 @@ export const getDayDetail = (date: string) => {
             path: getDayPagePath(date)
         }).then(html => {
             const $ = cheerio.load(html);
-            // 第二个表格里
-            const tableRows = $('table').eq(1).find('tr');
-            // 第2,6行
-            let houseCnt = tableRows.eq(1).find('td').eq(1).text();
-            let allDealCnt = tableRows.eq(5).find('td').eq(1).text();
+            // 第1个表格里
+            const tableRows = $('table').eq(0).find('tr');
+            // 最后一行 
+            const row = tableRows.last();
+            // 2, 4 列
+            let allDealCnt = row.find('td').eq(1).text();
+            let houseCnt = row.find('td').eq(3).text();
             houseCnt = stringToNum(houseCnt);
             allDealCnt = stringToNum(allDealCnt);
-            console.log(`date: ${date}, newHouseCnt: ${houseCnt}, allDealCnt: ${allDealCnt}`);
+            console.log(`date: ${date}, oldHouseCnt: ${houseCnt}, allDealCnt: ${allDealCnt}`);
             resolve({
                 allDealCnt: allDealCnt,
                 houseCnt: houseCnt

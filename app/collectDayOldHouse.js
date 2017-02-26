@@ -1,11 +1,11 @@
 "use strict";
 exports.__esModule = true;
-var newHouse_1 = require("../module/newHouse");
+var oldHouse_1 = require("../module/oldHouse");
 var deal_1 = require("../storage/deal");
 exports["default"] = function (date) {
-    newHouse_1.getDayDetail(date.format('YYYYMMDD')).then(function (detail) {
+    oldHouse_1.getDayDetail(date.format('YYYYMMDD')).then(function (detail) {
         console.dir(detail);
-        deal_1.writeDeal({
+        deal_1.writeSecondDeal({
             date: date.format('YYYY-MM-DD'),
             houseCnt: detail.houseCnt,
             allDealCnt: detail.allDealCnt
