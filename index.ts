@@ -6,12 +6,12 @@ const days = 3650;
 
 for (let i = 0; i < days; i++) {
     let date = moment().subtract(i + 1, 'days');
-    if (date.isAfter('2013-01-13')) {
-        // new house statistic
-        collectNew(date);
-        // old house statistic
-        collectOld(date);
-    } else {
-        break;
-    }
+    setTimeout(() => {
+        if (date.isAfter('2013-01-13')) {
+            // new house statistic
+            collectNew(date);
+            // old house statistic
+            collectOld(date);
+        }
+    }, i * 30);
 }

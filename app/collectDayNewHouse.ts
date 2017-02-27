@@ -4,7 +4,6 @@ import { writeDeal } from '../storage/deal';
 
 export default (date: moment.Moment) => {
     getDayDetail(date.format('YYYYMMDD')).then(detail => {
-        console.dir(detail);
         writeDeal({
             date: date.format('YYYY-MM-DD'),
             houseCnt: detail.houseCnt,

@@ -4,7 +4,8 @@
   "description": "tmsf spider",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"no test\""
+    "test": "echo \"no test\"",
+    "start": "tsc index.ts && node index.js"
   },
   "repository": {
     "type": "git",
