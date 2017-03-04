@@ -15,3 +15,16 @@ create table if not exists `deal` (
     `date` date NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+drop table if exists `inventory`;
+create table if not exists `inventory` (
+    `id` int(10) NOT NULL auto_increment,
+    `date` date NOT NULL,
+    `zhucheng` int(10) NOT NULL,
+    `xiaoshan` int(10) NOT NULL,
+    `yuhang` int(10) NOT NULL,
+    `fuyang` int(10) NOT NULL,
+    `dajiangdong` int(10) NOT NULL,
+    `total` int(10) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;

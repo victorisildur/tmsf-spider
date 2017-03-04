@@ -5,7 +5,7 @@ var collectDayOldHouse_1 = require("./app/collectDayOldHouse");
 var moment = require("moment");
 var days = 3650;
 var _loop_1 = function (i) {
-    var date = moment().subtract(i + 1, 'days');
+    var date = moment().subtract(i + 2, 'days');
     setTimeout(function () {
         if (date.isAfter('2013-01-13')) {
             // new house statistic

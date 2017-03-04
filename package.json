@@ -5,7 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"no test\"",
-    "start": "tsc index.ts && node index.js"
+    "historySale": "tsc index.ts && node index.js",
+    "sale": "tsc sale.ts && node sale.js",
+    "inventory": "tsc inventory.ts && node inventory.js"
   },
   "repository": {
     "type": "git",
