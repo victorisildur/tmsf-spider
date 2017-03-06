@@ -14,3 +14,9 @@ export interface Inventory {
     dajiangdong: number;
     total: number;
 }
+
+export interface Skill {
+    name: string;
+    star: number;
+    count: number;
+}

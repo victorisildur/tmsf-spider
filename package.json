@@ -7,7 +7,8 @@
     "test": "echo \"no test\"",
     "historySale": "tsc index.ts && node index.js",
     "sale": "tsc sale.ts && node sale.js",
-    "inventory": "tsc inventory.ts && node inventory.js"
+    "inventory": "tsc inventory.ts && node inventory.js",
+    "alexa": "tsc alexa.ts && node alexa.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "cheerio": "^0.22.0",
     "moment": "^2.17.1",
     "mysql": "^2.13.0",
+    "request": "^2.80.0",
     "typescript": "^2.2.1"
   },
   "devDependencies": {
