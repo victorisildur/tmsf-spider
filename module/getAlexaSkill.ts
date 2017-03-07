@@ -1,34 +1,41 @@
 import * as cheerio from 'cheerio';
-import { awsHost as host } from '../config';
-import { request, stringToNum } from '../util';
+import { alexaHost as host } from '../config';
+import { request, stringToNum, parenToNum } from '../util';
 import { Skill } from '../model';
 
-export const getSkills = (path: string) => {
-    return new Promise<Skill>((resolve, reject) => {
+export const getSkills = (type: string, page = 1) => {
+    return new Promise<Skill[]>((resolve, reject) => {
         request({
             host: host,
-            path: path
+            path: `/${type}/?page=${page}`
         }).then(html => {
             const $ = cheerio.load(html);
+            let skills = [];
             // 表格
-            console.log(html);
-            const table = $('#s-results-list-atf');
-            const rows = table.find('li');
-            let skills = rows.map((i, elem) => {
+            const rows = $('.list-group-item');
+            rows.each(function (i, elem) {
                 const li = $(this);
-                const name = li.find('h2').text();
-                const count = li.find('.a-size-small.a-link-normal.a-text-normal').text();
-                const star = 0;
-                console.log(`name: ${name}`);
-                console.log(`count: ${count}`);
-                return {
-                    name: name,
-                    star: 0,
-                    count: count
+                let name = li.find('.media-heading').text().trim(),
+                    count = 0,
+                    star = 0;
+                const countStar = li.find('.col-md-3.col-lg-3').contents();
+                if (countStar.length > 2) {
+                    count = parenToNum(countStar.first().text());
+                    star = stringToNum(li.find('input.rating').attr('value'));
+                }
+                const skill = {
+                    name,
+                    star,
+                    count,
+                    type
                 };
-            })
-            console.dir(skills);
+                if (skill.name !== '') {
+                    skills.push(skill);
+                }
+            });
             resolve(skills);
+        }, e => {
+            reject(e);
         })
     })
 }

@@ -19,4 +19,5 @@ export interface Skill {
     name: string;
     star: number;
     count: number;
+    type?: string;
 }
