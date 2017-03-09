@@ -46,6 +46,7 @@ exports.request = function (option) {
                 reject(e);
             });
         });
+        req.on('error', function (e) { return reject(e); });
         req.end();
     });
 };

@@ -15,8 +15,3 @@ export interface Inventory {
     total: number;
 }
 
-export interface Skill {
-    name: string;
-    star: number;
-    count: number;
-}

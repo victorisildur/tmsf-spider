@@ -54,6 +54,7 @@ export const request = (option: Option) => {
                 reject(e);
             });
         });
+        req.on('error', e => reject(e));
         req.end();
     });
 }

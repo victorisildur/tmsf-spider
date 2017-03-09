@@ -1,34 +1,40 @@
 import * as cheerio from 'cheerio';
 import { awsHost as host } from '../config';
 import { request, stringToNum } from '../util';
-import { Skill } from '../model';
+import { Skill, skillToString, extractStar } from '../model';
 
-export const getSkills = (path: string) => {
-    return new Promise<Skill>((resolve, reject) => {
-        request({
-            host: host,
-            path: path
-        }).then(html => {
+interface FetchRet {
+    skills: Skill[];
+    nextPath: string;
+}
+
+export const getSkills = (path: string, type: string) => {
+    console.log(`fetch type: ${type}, page: ${path}`);
+    return new Promise<FetchRet>((resolve, reject) => {
+        request({ host: host, path: path }).then(html => {
             const $ = cheerio.load(html);
             // 表格
-            console.log(html);
-            const table = $('#s-results-list-atf');
-            const rows = table.find('li');
-            let skills = rows.map((i, elem) => {
-                const li = $(this);
-                const name = li.find('h2').text();
-                const count = li.find('.a-size-small.a-link-normal.a-text-normal').text();
-                const star = 0;
-                console.log(`name: ${name}`);
-                console.log(`count: ${count}`);
-                return {
-                    name: name,
-                    star: 0,
-                    count: count
-                };
-            })
-            console.dir(skills);
-            resolve(skills);
-        })
+            const rows = $('li.s-result-item'),
+                nextPath = $('#pagnNextLink').attr('href');
+            console.log(`\ttype: ${type}\tnextPath: ${nextPath}`);
+            const skills = rows.map((i, elem) => {
+                const li = $(elem),
+                    name = li.find('h2.a-size-medium').text(),
+                    count = li.find('a.a-size-small.a-link-normal.a-text-normal').text() || 0,
+                    star = extractStar(li.find('.a-icon-alt').text());
+                const skill = {
+                    type,
+                    name,
+                    count,
+                    star
+                }
+                console.log(`\ttype:${type}: ${skillToString(skill)}`);
+                return skill;
+            }).get();
+            resolve({
+                skills,
+                nextPath
+            });
+        }, e => reject(e))
     })
 }
